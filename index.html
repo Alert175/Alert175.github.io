@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="v-style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Slab|Monoton|Poiret+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div id="v-app">
+                <h3 class="head">tasker</h3>
+                <input type="text" class="addItem" v-model="item" v-on:keyup.enter="addListItem" placeholder="Какие задачи на сегодня?">
+                <!-- <button type="button" v-on:click="addListItem">Добавить</button> -->
+                <ul class="listTasks">
+                    <li v-for="(item, id) in listItem" v-bind:class="{compliteTask: item.complite, listItem}">
+                        <span type="checkbox" id="_check" v-on:click="completeTask(id, item.complite)">
+                            <transition name="status">
+                                <i class="far fa-circle fa-1x" v-if="!item.complite"></i>
+                                <i class="fas fa-check fa-1x" v-if="item.complite"></i>
+                            </transition>
+                        </span>
+                        <span class="taskDescription">{{item.description}}</span>
+                        <transition name="delete">
+                            <button type="button" class="deleteTask" v-on:click="deleteListItem(id)"><i class="fas fa-backspace fa-2x"></i></button>
+                        </transition>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.4/dist/vue.js"></script>
+        <script src="v-script.js" charset="utf-8"></script>
+    </body>
+</html>
